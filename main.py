@@ -1,7 +1,14 @@
 import discord
 import os
+from dotenv import load_dotenv
+load_dotenv()  # reads .env into os.environ
 
-client =  discord.Client()
+
+intents = discord.Intents.default()
+intents.message_content = True
+client = discord.Client(intents=intents)
+
+# client =  discord.Client()
 
 #we are creating certain functions for discord bot to respond to 
 # these function names are actually from the discord.py library 
@@ -16,7 +23,7 @@ async def on_ready():
 #event triggered if it senses a message in the discord server
 # args: message
 @client.event
-async def on_meassage(message):
+async def on_message(message):
 # this on mesage eveent triggers each time a message is recieved
 # we dont want our bot to trigger it for its own messages
     if message.author == client.user:
@@ -32,4 +39,7 @@ async def on_meassage(message):
 # to run the bot 
 # we need to pass the token to the run command
 # token is stored in the env file
-client.run(os.getenv("TOKEN"))
+token = os.getenv("TOKEN")
+if not token:
+    raise RuntimeError("Missing TOKEN environment variable")
+client.run(token)
