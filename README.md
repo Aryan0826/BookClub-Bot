@@ -78,6 +78,7 @@ python bot.py
 - **DMs must be enabled** for the bot to contact users.
 - Verification codes **expire after 5 minutes**.
 - The bot **deletes public `$code` attempts** to protect user privacy.
+- You might want to store the script in an always running cloud platform.
 
 ---
 
